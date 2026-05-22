@@ -1,198 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shahriya & Afrida</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-  
-  body { 
-    font-family: 'Montserrat', sans-serif; 
-    color: #333;
-    overflow-x: hidden;
-    background: #E6E0F8;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shahriya & Afrida</title>
 
-  /* Fluid animated background */
-  .bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1;
-    background: linear-gradient(135deg, #E6E0F8, #F8EDEB, #B5838D);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-  }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-  }
+    :root{
+      --lavender:#E6E0F8;
+      --pink:#F8EDEB;
+      --rose:#B5838D;
+      --gold:#D4A373;
+      --white:#ffffff;
+      --glass:rgba(255,255,255,0.14);
+      --border:rgba(255,255,255,0.18);
+      --shadow:0 10px 40px rgba(0,0,0,0.18);
+    }
 
-  .glass {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    padding: 60px 40px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1.5s ease-out;
-    max-width: 900px;
-  }
+    body{
+      font-family:'Montserrat',sans-serif;
+      color:white;
+      overflow-x:hidden;
+      min-height:100vh;
+      background:#120f17;
+      position:relative;
+    }
 
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    color: #B5838D;
-    margin-bottom: 10px;
-    animation: float 4s ease-in-out infinite;
-  }
+    /* Animated Gradient Background */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+      radial-gradient(circle at 20% 20%, rgba(230,224,248,0.25), transparent 30%),
+      radial-gradient(circle at 80% 30%, rgba(248,237,235,0.18), transparent 35%),
+      radial-gradient(circle at 50% 80%, rgba(181,131,141,0.25), transparent 40%),
+      linear-gradient(135deg,#120f17,#1b1522,#221825);
+      background-size:200% 200%;
+      animation:bgMove 16s ease infinite;
+      z-index:-3;
+    }
 
-  .subtext {
-    font-size: 1.2rem;
-    color: #555;
-    font-weight: 300;
-    margin-bottom: 40px;
-  }
+    @keyframes bgMove{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
 
-  .counter {
-    display: flex;
-    gap: 25px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
+    /* Floating Blurs */
+    .blur{
+      position:fixed;
+      border-radius:50%;
+      filter:blur(80px);
+      opacity:0.45;
+      z-index:-2;
+      animation:float 10s ease-in-out infinite;
+    }
 
-  .time-box {
-    background: rgba(255, 255, 255, 0.3);
-    padding: 20px 25px;
-    border-radius: 15px;
-    min-width: 110px;
-    transition: transform 0.3s ease;
-  }
+    .blur1{
+      width:260px;
+      height:260px;
+      background:#b5838d;
+      top:-80px;
+      left:-60px;
+    }
 
-  .time-box:hover {
-    transform: translateY(-5px);
-  }
+    .blur2{
+      width:300px;
+      height:300px;
+      background:#d4a373;
+      bottom:-100px;
+      right:-80px;
+      animation-delay:2s;
+    }
 
-  .time-box .num {
-    font-size: 2.8rem;
-    font-weight: 500;
-    color: #B5838D;
-    font-family: 'Playfair Display', serif;
-  }
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0px) translateX(0px);
+      }
+      50%{
+        transform:translateY(-25px) translateX(15px);
+      }
+    }
 
-  .time-box .label {
-    font-size: 0.85rem;
-    color: #666;
-    margin-top: 5px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-  }
+    /* Floating particles */
+    .particles span{
+      position:absolute;
+      display:block;
+      border-radius:50%;
+      background:rgba(255,255,255,0.12);
+      animation:particle 18s linear infinite;
+      bottom:-150px;
+    }
 
-  .message {
-    font-size: 1.1rem;
-    color: #555;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.8;
-  }
+    @keyframes particle{
+      0%{
+        transform:translateY(0) scale(0);
+        opacity:0;
+      }
+      10%{
+        opacity:1;
+      }
+      100%{
+        transform:translateY(-120vh) scale(1);
+        opacity:0;
+      }
+    }
 
-  footer {
-    text-align: center;
-    padding: 30px 20px;
-    color: #B5838D;
-    font-size: 0.9rem;
-  }
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+      position:relative;
+    }
 
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    .container{
+      width:100%;
+      max-width:1100px;
+      text-align:center;
+      animation:fadeUp 1.4s ease;
+    }
 
-  @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    .glass { padding: 40px 25px; }
-    .counter { gap: 15px; }
-    .time-box { min-width: 80px; padding: 15px 18px; }
-    .time-box .num { font-size: 2rem; }
-  }
-</style>
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .glass{
+      background:var(--glass);
+      border:1px solid var(--border);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-radius:28px;
+      padding:40px 28px;
+      box-shadow:var(--shadow);
+      transition:0.4s ease;
+    }
+
+    .glass:hover{
+      transform:translateY(-6px);
+      box-shadow:0 18px 50px rgba(0,0,0,0.25);
+    }
+
+    h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.7rem,8vw,5.5rem);
+      line-height:1.1;
+      margin-bottom:16px;
+      color:var(--lavender);
+      text-shadow:0 5px 25px rgba(255,255,255,0.15);
+    }
+
+    .sub{
+      font-size:1rem;
+      line-height:1.8;
+      color:rgba(255,255,255,0.82);
+      max-width:650px;
+      margin:0 auto 35px;
+    }
+
+    .date{
+      color:var(--gold);
+      font-weight:600;
+      letter-spacing:2px;
+      margin-bottom:28px;
+      text-transform:uppercase;
+      font-size:0.9rem;
+    }
+
+    /* Counter */
+    .counter-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+      gap:18px;
+      margin:35px 0;
+    }
+
+    .counter-box{
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:22px;
+      padding:24px 12px;
+      transition:0.35s ease;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .counter-box::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        135deg,
+        rgba(255,255,255,0.12),
+        transparent
+      );
+      opacity:0;
+      transition:0.35s ease;
+    }
+
+    .counter-box:hover::before{
+      opacity:1;
+    }
+
+    .counter-box:hover{
+      transform:translateY(-6px) scale(1.02);
+    }
+
+    .number{
+      font-size:clamp(2rem,5vw,3rem);
+      font-weight:700;
+      color:var(--pink);
+      margin-bottom:8px;
+    }
+
+    .label{
+      font-size:0.9rem;
+      text-transform:uppercase;
+      letter-spacing:1.5px;
+      color:rgba(255,255,255,0.7);
+    }
+
+    .message{
+      margin-top:30px;
+      font-size:1.05rem;
+      color:rgba(255,255,255,0.88);
+      line-height:1.9;
+    }
+
+    footer{
+      padding:30px 20px 50px;
+      text-align:center;
+      color:rgba(255,255,255,0.65);
+      font-size:0.92rem;
+    }
+
+    .heart{
+      color:#ffb3c6;
+      animation:pulse 2s infinite;
+      display:inline-block;
+    }
+
+    @keyframes pulse{
+      0%,100%{
+        transform:scale(1);
+      }
+      50%{
+        transform:scale(1.2);
+      }
+    }
+
+    /* Mobile */
+    @media(max-width:600px){
+      .glass{
+        padding:32px 18px;
+      }
+
+      .counter-grid{
+        gap:14px;
+      }
+
+      .number{
+        font-size:2rem;
+      }
+    }
+  </style>
 </head>
-<body>
-<div class="bg"></div>
 
-<section class="hero">
-  <div class="glass">
-    <h1>Shahriya & Afrida</h1>
-    <p class="subtext">Since 27 September 2025 • Alhamdulillah for the day I met you</p>
-    
-    <div class="counter">
-      <div class="time-box">
-        <div class="num" id="years">0</div>
-        <div class="label">Years</div>
-      </div>
-      <div class="time-box">
-        <div class="num" id="days">0</div>
-        <div class="label">Days</div>
-      </div>
-      <div class="time-box">
-        <div class="num" id="hours">0</div>
-        <div class="label">Hours</div>
-      </div>
-      <div class="time-box">
-        <div class="num" id="minutes">0</div>
-        <div class="label">Minutes</div>
-      </div>
-      <div class="time-box">
-        <div class="num" id="seconds">0</div>
-        <div class="label">Seconds</div>
+<body>
+
+  <!-- Floating Blurs -->
+  <div class="blur blur1"></div>
+  <div class="blur blur2"></div>
+
+  <!-- Floating Particles -->
+  <div class="particles">
+    <span style="left:10%; width:10px; height:10px; animation-duration:14s;"></span>
+    <span style="left:25%; width:6px; height:6px; animation-duration:18s;"></span>
+    <span style="left:45%; width:12px; height:12px; animation-duration:16s;"></span>
+    <span style="left:60%; width:8px; height:8px; animation-duration:20s;"></span>
+    <span style="left:80%; width:14px; height:14px; animation-duration:22s;"></span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="glass">
+
+        <div class="date">
+          Since 27 September 2025
+        </div>
+
+        <h1>
+          Shahriya <span style="color:var(--gold)">&</span> Afrida
+        </h1>
+
+        <p class="sub">
+          Alhamdulillah for the day I met you.
+          The day our story began, the day you accepted my proposal,
+          and the day my heart found its home.
+        </p>
+
+        <!-- Counter -->
+        <div class="counter-grid">
+
+          <div class="counter-box">
+            <div class="number" id="years">0</div>
+            <div class="label">Years</div>
+          </div>
+
+          <div class="counter-box">
+            <div class="number" id="days">0</div>
+            <div class="label">Days</div>
+          </div>
+
+          <div class="counter-box">
+            <div class="number" id="hours">0</div>
+            <div class="label">Hours</div>
+          </div>
+
+          <div class="counter-box">
+            <div class="number" id="minutes">0</div>
+            <div class="label">Minutes</div>
+          </div>
+
+          <div class="counter-box">
+            <div class="number" id="seconds">0</div>
+            <div class="label">Seconds</div>
+          </div>
+
+        </div>
+
+        <p class="message">
+          Every second since that beautiful day has become part of our forever.
+          Through every smile, prayer, and memory —
+          you remain the most beautiful chapter of my life.
+        </p>
+
       </div>
     </div>
+  </section>
 
-    <p class="message">
-      Every second since that day has been a blessing. 
-      Thank you for saying yes, Afrida.
-    </p>
-  </div>
-</section>
+  <footer>
+    Made with <span class="heart">♥</span> for Afrida
+  </footer>
 
-<footer>Thanks For visiting</footer>
+  <script>
+    // Target Date
+    const startDate = new Date("September 27, 2025 00:00:00").getTime();
 
-<script>
-  const startDate = new Date("2025-09-27T00:00:00").getTime();
-  
-  function updateCounter() {
-    const now = new Date().getTime();
-    const diff = now - startDate;
-    
-    const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
-    const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    
-    document.getElementById("years").textContent = years;
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
-  }
-  
-  updateCounter();
-  setInterval(updateCounter, 1000);
-</script>
+    const yearsEl = document.getElementById("years");
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function updateCounter() {
+
+      const now = new Date().getTime();
+      const diff = now - startDate;
+
+      if(diff < 0){
+        yearsEl.innerHTML = "0";
+        daysEl.innerHTML = "0";
+        hoursEl.innerHTML = "0";
+        minutesEl.innerHTML = "0";
+        secondsEl.innerHTML = "0";
+        return;
+      }
+
+      const seconds = Math.floor(diff / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+      const years = Math.floor(days / 365);
+
+      const remainingDays = days % 365;
+      const remainingHours = hours % 24;
+      const remainingMinutes = minutes % 60;
+      const remainingSeconds = seconds % 60;
+
+      yearsEl.innerHTML = years;
+      daysEl.innerHTML = remainingDays;
+      hoursEl.innerHTML = remainingHours;
+      minutesEl.innerHTML = remainingMinutes;
+      secondsEl.innerHTML = remainingSeconds;
+    }
+
+    updateCounter();
+    setInterval(updateCounter,1000);
+  </script>
 
 </body>
 </html>
